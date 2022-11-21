@@ -28,8 +28,8 @@ pub async fn tx_raw(network: String, tx_hex: String) -> Result<String, Error>{
 
 #[derive(Deserialize, Serialize, Debug, PartialEq, Eq)]
 pub struct ScriptHistory{
-    tx_hash: String,
-    height: u32,
+    pub tx_hash: String,
+    pub height: u32,
 }
 
 pub fn script_history_sync(network: String, script_hash: String) -> Result<Vec<ScriptHistory>, Error>{
@@ -68,17 +68,17 @@ pub async fn script_unspent(network: String, script_hash: String) -> Result<Vec<
 
 #[derive(Deserialize, Serialize, Debug, PartialEq, Eq)]
 pub struct Unspent{
-    height: u32,
-    tx_pos: u16,
-    tx_hash: String,
-    value: u32,
+    pub height: u32,
+    pub tx_pos: u16,
+    pub tx_hash: String,
+    pub value: u32,
 }
 
 #[derive(Deserialize, Serialize, Debug, PartialEq, Eq)]
 pub struct ScriptsUnspent{
-    script: String,
+    pub script: String,
     pub unspent: Vec<Unspent>,
-    error: String,
+    pub error: String,
 }
 
 pub fn scripts_unspent_sync(network: String, scripts: &Vec<String>) -> Result<Vec<ScriptsUnspent>, Error>{
