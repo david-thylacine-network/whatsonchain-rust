@@ -77,7 +77,7 @@ pub struct Unspent{
 #[derive(Deserialize, Serialize, Debug, PartialEq, Eq)]
 pub struct ScriptsUnspent{
     script: String,
-    unspent: Vec<Unspent>,
+    pub unspent: Vec<Unspent>,
     error: String,
 }
 
