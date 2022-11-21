@@ -93,7 +93,6 @@ pub async fn scripts_unspent(network: String, scripts: &Vec<String>) -> Result<V
         network=network
     );
     let params = json!({ "scripts": scripts }).to_string();
-    println!("params: {:?}", params);
     
     let client = reqwest::Client::new();
     let response = client.post(&request_url)
