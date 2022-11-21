@@ -1,5 +1,5 @@
 use reqwest::Error;
-use serde_derive::Deserialize; 
+use serde_derive::{Deserialize, Serialize}; 
 use serde_json::json;
 use tokio::runtime::Runtime;
 
@@ -26,7 +26,7 @@ pub async fn tx_raw(network: String, tx_hex: String) -> Result<String, Error>{
     Ok(ret)
 }
 
-#[derive(Deserialize, Debug, PartialEq, Eq)]
+#[derive(Deserialize, Serialize, Debug, PartialEq, Eq)]
 pub struct ScriptHistory{
     tx_hash: String,
     height: u32,
@@ -66,7 +66,7 @@ pub async fn script_unspent(network: String, script_hash: String) -> Result<Vec<
     Ok(ret)
 }
 
-#[derive(Deserialize, Debug, PartialEq, Eq)]
+#[derive(Deserialize, Serialize, Debug, PartialEq, Eq)]
 pub struct Unspent{
     height: u32,
     tx_pos: u16,
@@ -74,7 +74,7 @@ pub struct Unspent{
     value: u32,
 }
 
-#[derive(Deserialize, Debug, PartialEq, Eq)]
+#[derive(Deserialize, Serialize, Debug, PartialEq, Eq)]
 pub struct ScriptsUnspent{
     script: String,
     unspent: Vec<Unspent>,
