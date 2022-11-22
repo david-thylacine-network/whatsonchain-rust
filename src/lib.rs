@@ -3,13 +3,13 @@ use serde_derive::{Deserialize, Serialize};
 use serde_json::json;
 use tokio::runtime::Runtime;
 
-pub fn tx_raw_sync(network: String, tx_hex: String) -> Result<String, Error>{
+pub fn tx_raw_sync(network: &String, tx_hex: &String) -> Result<String, Error>{
     let rt = Runtime::new().unwrap();
     let future_fn = tx_raw(network, tx_hex);
     rt.block_on(future_fn)
 }
 
-pub async fn tx_raw(network: String, tx_hex: String) -> Result<String, Error>{
+pub async fn tx_raw(network: &String, tx_hex: &String) -> Result<String, Error>{
     let request_url = format!(
         "https://api.whatsonchain.com/v1/bsv/{network}/tx/raw",
         network=network
@@ -32,13 +32,13 @@ pub struct ScriptHistory{
     pub height: u32,
 }
 
-pub fn script_history_sync(network: String, script_hash: String) -> Result<Vec<ScriptHistory>, Error>{
+pub fn script_history_sync(network: &String, script_hash: &String) -> Result<Vec<ScriptHistory>, Error>{
     let rt = Runtime::new().unwrap();
     let future_fn = script_history(network, script_hash);
     rt.block_on(future_fn)
 }
 
-pub async fn script_history(network: String, script_hash: String) -> Result<Vec<ScriptHistory>, Error>{
+pub async fn script_history(network: &String, script_hash: &String) -> Result<Vec<ScriptHistory>, Error>{
     let request_url = format!(
         "https://api.whatsonchain.com/v1/bsv/{network}/script/{script_hash}/history",
         network=network,
@@ -49,13 +49,13 @@ pub async fn script_history(network: String, script_hash: String) -> Result<Vec<
     Ok(ret)
 }
 
-pub fn script_unspent_sync(network: String, script_hash: String) -> Result<Vec<ScriptHistory>, Error>{
+pub fn script_unspent_sync(network: &String, script_hash: &String) -> Result<Vec<ScriptHistory>, Error>{
     let rt = Runtime::new().unwrap();
     let future_fn = script_unspent(network, script_hash);
     rt.block_on(future_fn)
 }
 
-pub async fn script_unspent(network: String, script_hash: String) -> Result<Vec<ScriptHistory>, Error>{
+pub async fn script_unspent(network: &String, script_hash: &String) -> Result<Vec<ScriptHistory>, Error>{
     let request_url = format!(
         "https://api.whatsonchain.com/v1/bsv/{network}/script/{script_hash}/unspent",
         network=network,
@@ -81,13 +81,13 @@ pub struct ScriptsUnspent{
     pub error: String,
 }
 
-pub fn scripts_unspent_sync(network: String, scripts: &Vec<String>) -> Result<Vec<ScriptsUnspent>, Error>{
+pub fn scripts_unspent_sync(network: &String, scripts: &Vec<String>) -> Result<Vec<ScriptsUnspent>, Error>{
     let rt = Runtime::new().unwrap();
     let future_fn = scripts_unspent(network, scripts);
     rt.block_on(future_fn)
 }
 
-pub async fn scripts_unspent(network: String, scripts: &Vec<String>) -> Result<Vec<ScriptsUnspent>, Error>{
+pub async fn scripts_unspent(network: &String, scripts: &Vec<String>) -> Result<Vec<ScriptsUnspent>, Error>{
     let request_url = format!(
         "https://api.whatsonchain.com/v1/bsv/{network}/scripts/unspent",
         network=network
@@ -104,13 +104,13 @@ pub async fn scripts_unspent(network: String, scripts: &Vec<String>) -> Result<V
     Ok(ret)
 }
 
-pub fn woc_sync(network: String) -> Result<bool, Error> {
+pub fn woc_sync(network: &String) -> Result<bool, Error> {
     let rt = Runtime::new().unwrap();
     let future_fn = woc(network);
     rt.block_on(future_fn)
 }
 
-pub async fn woc(network: String) -> Result<bool, Error> {
+pub async fn woc(network: &String) -> Result<bool, Error> {
     let request_url = format!(
         "https://api.whatsonchain.com/v1/bsv/{network}/woc",
         network=network
